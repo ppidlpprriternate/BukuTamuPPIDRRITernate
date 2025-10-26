@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buku Tamu RRI Ternate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <div class="site-header">
+        <img src="RADIO.png" alt="Logo RRI" class="logo">
+        <h1>Buku Tamu RRI Ternate</h1>
+        <p class="tagline">Sekali di Udara, Tetap di Udara!</p>
+    </div>
+</header>
+<main class="container">
+  <div class="form-card">
+    <h2>Selamat Datang! Silahkan Isi Buku Tamu Berikut.</h2>
+    <form id="formBukuTamu">
+      <label for="tanggal">Tanggal Kunjungan</label>
+      <input type="date" id="tanggal" name="tanggal" required>
+
+      <label for="nama">Nama Lengkap</label>
+      <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+
+      <label for="asal">Asal Instansi/Kota</label>
+      <input type="text" id="asal" name="asal" placeholder="Contoh: RRI Jakarta / Surabaya">
+
+      <label for="telepon">Nomor Telepon</label>
+      <input type="tel" id="telepon" name="telepon" placeholder="628xxxxxxxxxx">
+
+      <label for="jumlah">Jumlah Tamu</label>
+      <input type="number" id="jumlah" name="jumlah" min="1" placeholder="Isi jumlah tamu">
+
+      <label for="Tujuan">Tujuan Kunjungan</label>
+      <select id="Tujuan" name="Tujuan" required>
+        <option value="">-- Pilih Tujuan --</option>
+        <option value="terjadwal">Terjadwal</option>
+        <option value="tidak terjadwal">Tidak Terjadwal</option>
+      </select>
+
+      <div id="bagian-terjadwal" class="hidden">
+        <label for="jenisLayananTerjadwal">Jenis Layanan</label>
+        <select id="jenisLayananTerjadwal" name="jenisLayananTerjadwal">
+          <option value="">-- Pilih Jenis Layanan--</option>
+          <option value="pnbp">PNBP</option>
+          <option value="non-pnbp">Non PNBP</option>
+        </select>
+
+      <div id="terjadwal-pnbp" class="hidden">
+        <label for="programPNBP">Nama Program</label>
+        <input type="text" id="programPNBP" placeholder="Contoh: Iklan Produk"/>
+        <label for="proPNBP">Pilihan Layanan</label>
+        <select id="proPNBP" name="proPNBP">
+          <option value="">-- Pilih Program</option>
+          <option value="PRO 1">PRO 1</option>
+        </select>
+      </div>
+
+      <div id="terjadwal-nonpnbp" class="hidden">
+        <label for="programNonPNBP">Nama Program</label>
+        <input type="text" id="programNonPNBP" name="programNonPNBP" placeholder="Contoh: Iklan Produk" />
+        <label for="proNonPNBP">Pilihan Layanan</label>
+        <select id="proNonPNBP" name="proNonPNBP">
+          <option value="">-- Pilih Program --</option>
+          <option value="PRO 1">PRO 1</option>
+          <option value="PRO 2">PRO 2</option>
+          <option value="PRO 4">PRO 4</option>
+        </select>
+      </div>
+    </div>
+    
+    <div id="bagian-tidakterjadwal" class="hidden">
+          <label for="layananTidakTerjadwal">Layanan PNBP</label>
+          <input type="text" id="layananTidakTerjadwal" name="layananTidakTerjadwal" placeholder="Iklan Produk" />
+          </select>
+          <div class="ratecard-box">
+            <p><strong>Daftar Layanan RRI (Ratecard)</strong></p>
+            <img src="ratecard.jpg" alt="Ratecard RRI" class="ratecard-img" />
+          </div>
+        </div>
+
+      <label for="kepuasan">Tingkat Kepuasan Pelayanan</label>
+      <select id="kepuasan" name="kepuasan" required>
+        <option value="">-- Pilih Tingkat Kepuasan --</option>
+        <option value="sangat-puas">Sangat Puas</option>
+        <option value="puas">Puas</option>
+        <option value="cukup">Cukup</option>
+        <option value="kurang">Kurang</option>
+        <option value="tidak-puas">Tidak Puas</option>
+      </select>
+
+      <label for="masukan">Masukan</label>
+      <textarea id="masukan" name="masukan" rows="4" placeholder="Tuliskan masukan"></textarea>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+</main>
+<footer>
+    <div class="footer-box">
+        <img src="RADIO.png" alt="Logo RRI" class="logo">
+        <div class="site-title">
+        <h1>Copyright PPID LPP RRI Ternate</h1>
+        <p class="tagline">Sekali di Udara, Tetap di Udara!</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

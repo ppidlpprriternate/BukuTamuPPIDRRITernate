@@ -1,0 +1,114 @@
+header {
+    max-width: 99.5%;
+    margin: 12px auto;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+.site-header {
+    background-color: #0057b8;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+    border-radius: 20px 20px 0 0;
+}
+.site-header .logo {
+    width: 150px;
+    margin-bottom: 5px;
+}
+.site-header h1 {
+    font-size: 30px;
+    margin-bottom: 1px;
+}
+.site-header .tagline {
+    font-size: 12px;
+    margin-bottom: 1px;
+}
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.form-card {
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.form-card h2 {
+  margin-bottom: 10px;
+  color: #0057b8; 
+}
+form label {
+display: block;
+margin-top: 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc; 
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+}
+form input,
+form textarea,
+form select {
+    border-color: auto;
+    outline: none;
+}
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0057b8; /* biru */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+form button:hover {
+    background-color: #3c3b3b;
+}
+footer {
+    max-width: 98%;
+    margin: 10px auto;
+}
+.footer-box {
+    background-color: #0057b8;
+    color: white;
+    text-align: center;
+    padding: 20px 20px;
+    border-radius: 20px;
+    line-height: 1.6;
+}
+.footer-box .logo {
+    width: 100px;
+    margin-bottom: 5px;
+}
+.site-title h1 {
+    font-size: 16px;
+    margin-bottom: 0.9px;
+}
+.site-title .tagline {
+    font-size: 12px;
+    margin-bottom: 0.9px;
+}
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.hidden {
+  display: none;
+}
