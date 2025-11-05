@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
       bagianTidakTerjadwal.classList.remove("hidden");
     }
   });
+  
+jenisLayanan.addEventListener("change", function () {
+    terjadwalPNBP.classList.add("hidden");
+    terjadwalNonPNBP.classList.add("hidden");
+
+    if (this.value === "pnbp") {
+      terjadwalPNBP.classList.remove("hidden");
+    } else if (this.value === "non-pnbp") {
+      terjadwalNonPNBP.classList.remove("hidden");
+    }
+  });
 
 const canvas = document.getElementById("signature-pad");
 if (canvas) {
@@ -114,6 +125,7 @@ if (canvas) {
       });
   });
 });
+
 
 
 
