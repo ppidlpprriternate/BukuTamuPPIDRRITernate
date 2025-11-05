@@ -82,9 +82,10 @@ form button:hover {
 }
 canvas {
     display: block;
-  background: #fff;
-  cursor: crosshair;
-  z-index: 10;
+    background: #fff;
+    cursor: crosshair;
+    z-index: 10;
+    touch-action: none;
 }
 .ttd-box {
     position: relative;
@@ -129,3 +130,4 @@ footer {
   display: none;
 
 }
+
