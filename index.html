@@ -96,6 +96,14 @@
       <label for="masukan">Masukan</label>
       <textarea id="masukan" name="masukan" rows="4" placeholder="Tuliskan masukan"></textarea>
 
+      <label for="ttd">Tanda Tangan</label>
+      <div class="ttd-box">
+      <canvas id="signature-pad" width="300" height="150" style="border:1px solid #000; border-radius:8px;"></canvas>
+      <br>
+      <button type="button" id="clear-ttd">Hapus Tanda Tangan</button>
+      </div>
+      <input type="hidden" id="ttdData" name="ttdData">
+
       <button type="submit">Kirim</button>
     </form>
   </div>
@@ -112,4 +120,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
