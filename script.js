@@ -26,13 +26,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("signature-pad");
-  if (!canvas) return;
+  const clearBtn = document.getElementById("clear-ttd");
+  const form = document.getElementById("formBukuTamu");
+
+  if (!canvas || !form) return; 
 
   const ctx = canvas.getContext("2d");
   let drawing = false;
-
-  canvas.width = 300;
-  canvas.height = 150;
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    ctx.putImageData(temp, 0, 0);
+  }
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
 
   function drawLine(x, y) {
     ctx.lineWidth = 2;
@@ -46,14 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   canvas.addEventListener("mousedown", e => {
     drawing = true;
-    drawLine(x,y);
+    drawLine(e.offsetX, e.offsetY);
   });
+
   canvas.addEventListener("mouseup", () => {
     drawing = false;
     ctx.beginPath();
   });
+
   canvas.addEventListener("mousemove", e => {
-    if (drawing) drawLine(x,y);
+    if (drawing) drawLine(e.offsetX, e.offsetY);
   });
 
   canvas.addEventListener("touchstart", e => {
@@ -63,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const touch = e.touches[0];
     drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
+
   canvas.addEventListener("touchmove", e => {
     e.preventDefault();
     if (!drawing) return;
@@ -70,25 +82,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const touch = e.touches[0];
     drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
+
   canvas.addEventListener("touchend", () => {
     drawing = false;
     ctx.beginPath();
   });
 
-  const clearBtn = document.getElementById("clear-ttd");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
-  }
+  clearBtn.addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
 
-  const form = document.getElementById("formBukuTamu");
-  if (form) {
-    form.addEventListener("submit", e => {
-      const ttdData = canvas.toDataURL("image/png");
-      document.getElementById("ttdData").value = ttdData;
-    });
-  }
+  form.addEventListener("submit", e => {
+    const ttdData = canvas.toDataURL("image/png");
+    document.getElementById("ttdData").value = ttdData;
+  });
 });
 
   form.addEventListener("submit", function (e) {
@@ -114,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
 
