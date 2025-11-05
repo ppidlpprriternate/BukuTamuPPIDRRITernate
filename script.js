@@ -24,27 +24,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-const canvas = document.getElementById("signature-pad");
-if (canvas) {
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("signature-pad");
+  if (!canvas) return;
+
   const ctx = canvas.getContext("2d");
   let drawing = false;
+
   canvas.width = 300;
   canvas.height = 150;
 
-canvas.addEventListener("mousedown", () => (drawing = true));
-canvas.addEventListener("mouseup", () => (drawing = false, ctx.beginPath()));
-canvas.addEventListener("mousemove", draw);
+  function drawLine(x, y) {
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
 
-function drawline(x, y) {
-  ctx.lineWidth = 2;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "#000";
-  ctx.lineTo(x, y);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(x, y);
-}
-   canvas.addEventListener("mousedown", e => {
+  canvas.addEventListener("mousedown", e => {
     drawing = true;
     drawLine(e.offsetX, e.offsetY);
   });
@@ -55,15 +55,14 @@ function drawline(x, y) {
   canvas.addEventListener("mousemove", e => {
     if (drawing) drawLine(e.offsetX, e.offsetY);
   });
-  
-   canvas.addEventListener("touchstart", e => {
+
+  canvas.addEventListener("touchstart", e => {
     e.preventDefault();
     drawing = true;
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
     drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
-
   canvas.addEventListener("touchmove", e => {
     e.preventDefault();
     if (!drawing) return;
@@ -71,25 +70,26 @@ function drawline(x, y) {
     const touch = e.touches[0];
     drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
-
   canvas.addEventListener("touchend", () => {
     drawing = false;
     ctx.beginPath();
   });
 
+  const clearBtn = document.getElementById("clear-ttd");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  }
 
-document.getElementById("clear-ttd").addEventListener("click", () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const form = document.getElementById("formBukuTamu");
+  if (form) {
+    form.addEventListener("submit", e => {
+      const ttdData = canvas.toDataURL("image/png");
+      document.getElementById("ttdData").value = ttdData;
+    });
+  }
 });
-
-const form = document.getElementById("formBukuTamu");
-  form.addEventListener("submit", e => {
-    const ttdData = canvas.toDataURL(); // ubah ke base64
-    document.getElementById("ttdData").value = ttdData;
-  });
-}
-
-
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -114,6 +114,7 @@ const form = document.getElementById("formBukuTamu");
       });
   });
 });
+
 
 
 
