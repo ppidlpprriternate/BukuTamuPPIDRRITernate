@@ -24,76 +24,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const canvas = document.getElementById("signature-pad");
-  const clearBtn = document.getElementById("clear-ttd");
+document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("formBukuTamu");
-
-  if (!canvas || !form) return; 
-
+  const canvas = document.getElementById("signature-pad");
   const ctx = canvas.getContext("2d");
   let drawing = false;
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    ctx.putImageData(temp, 0, 0);
-  }
-  resizeCanvas();
-  window.addEventListener("resize", resizeCanvas);
 
-  function drawLine(x, y) {
-    ctx.lineWidth = 2;
-    ctx.lineCap = "round";
-    ctx.strokeStyle = "#000";
-    ctx.lineTo(x, y);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-  }
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "#000";
 
-  canvas.addEventListener("mousedown", e => {
+  canvas.addEventListener("mousedown", (e) => {
     drawing = true;
-    drawLine(e.offsetX, e.offsetY);
+    ctx.beginPath();
+    ctx.moveTo(e.offsetX, e.offsetY);
+  });
+
+  canvas.addEventListener("mousemove", (e) => {
+    if (!drawing) return;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
   });
 
   canvas.addEventListener("mouseup", () => {
     drawing = false;
-    ctx.beginPath();
   });
 
-  canvas.addEventListener("mousemove", e => {
-    if (drawing) drawLine(e.offsetX, e.offsetY);
-  });
-
-  canvas.addEventListener("touchstart", e => {
+  canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
-    drawing = true;
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
+    drawing = true;
+    ctx.beginPath();
+    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
   });
 
-  canvas.addEventListener("touchmove", e => {
+  canvas.addEventListener("touchmove", (e) => {
     e.preventDefault();
     if (!drawing) return;
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
+    ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    ctx.stroke();
   });
 
-  canvas.addEventListener("touchend", () => {
+  canvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
     drawing = false;
-    ctx.beginPath();
   });
-
-  clearBtn.addEventListener("click", () => {
+  document.getElementById("clear-ttd").addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   });
-
-  form.addEventListener("submit", e => {
-    const ttdData = canvas.toDataURL("image/png");
+  form.addEventListener("submit", function (e) {
+    const ttdData = canvas.toDataURL();
     document.getElementById("ttdData").value = ttdData;
   });
 });
@@ -121,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
 
