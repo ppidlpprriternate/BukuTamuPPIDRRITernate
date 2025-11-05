@@ -55,6 +55,7 @@ function drawline(x, y) {
   canvas.addEventListener("mousemove", e => {
     if (drawing) drawLine(e.offsetX, e.offsetY);
   });
+  
    canvas.addEventListener("touchstart", e => {
     e.preventDefault();
     drawing = true;
@@ -113,5 +114,6 @@ const form = document.getElementById("formBukuTamu");
       });
   });
 });
+
 
 
