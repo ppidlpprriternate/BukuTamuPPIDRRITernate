@@ -80,19 +80,6 @@ form button {
 form button:hover {
     background-color: #3c3b3b;
 }
-
-canvas {
-  display: block;
-  background: #fff;
-  cursor: crosshair;
-  z-index: 10;
-}
-.ttd-box {
-  position: relative;
-  z-index: 5;
-}
-
-
 footer {
     max-width: 98%;
     margin: 10px auto;
@@ -130,10 +117,4 @@ footer {
 }
 .hidden {
   display: none;
-
 }
-
-
-
-
-
