@@ -46,14 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   canvas.addEventListener("mousedown", e => {
     drawing = true;
-    drawLine(e.offsetX, e.offsetY);
+    drawLine(x,y);
   });
   canvas.addEventListener("mouseup", () => {
     drawing = false;
     ctx.beginPath();
   });
   canvas.addEventListener("mousemove", e => {
-    if (drawing) drawLine(e.offsetX, e.offsetY);
+    if (drawing) drawLine(x,y);
   });
 
   canvas.addEventListener("touchstart", e => {
@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+
 
 
 
