@@ -80,22 +80,21 @@ form button {
 form button:hover {
     background-color: #3c3b3b;
 }
-canvas {
-    display: block;
-    background: #fff;
-    cursor: crosshair;
-    z-index: 10;
-    touch-action: none;
-}
-.ttd-box {
-    position: relative;
-  z-index: 5;
-}
+
 #signature-pad {
-    touch-action: none;
-    background: #fff;
-    cursor: crosshair;
-    display: block;
+  width: 100%;
+  max-width: 300px;
+  height: 150px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #fff;
+  touch-action: none; 
+  cursor: crosshair;
+}
+
+.ttd-box {
+  margin-top: 10px;
+  text-align: center;
 }
 
 footer {
@@ -137,5 +136,6 @@ footer {
   display: none;
 
 }
+
 
 
