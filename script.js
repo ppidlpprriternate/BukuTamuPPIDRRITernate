@@ -24,62 +24,72 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("formBukuTamu");
-  const canvas = document.getElementById("signature-pad");
+const canvas = document.getElementById("signature-pad");
+if (canvas) {
   const ctx = canvas.getContext("2d");
   let drawing = false;
+  canvas.width = 300;
+  canvas.height = 150;
 
-  ctx.lineWidth = 2;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = "#000";
 
-  canvas.addEventListener("mousedown", (e) => {
-    drawing = true;
-    ctx.beginPath();
-    ctx.moveTo(e.offsetX, e.offsetY);
-  });
-
-  canvas.addEventListener("mousemove", (e) => {
-    if (!drawing) return;
-    ctx.lineTo(e.offsetX, e.offsetY);
+  function drawLine(x, y) {
+    ctx.lineWidth = 2;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+    ctx.lineTo(x, y);
     ctx.stroke();
-  });
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+  }
 
+  canvas.addEventListener("mousedown", e => {
+    drawing = true;
+    drawLine(e.offsetX, e.offsetY);
+  });
   canvas.addEventListener("mouseup", () => {
     drawing = false;
+    ctx.beginPath();
+  });
+  canvas.addEventListener("mousemove", e => {
+    if (drawing) drawLine(e.offsetX, e.offsetY);
   });
 
-  canvas.addEventListener("touchstart", (e) => {
+  canvas.addEventListener("touchstart", e => {
     e.preventDefault();
+    drawing = true;
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    drawing = true;
-    ctx.beginPath();
-    ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+    drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
 
-  canvas.addEventListener("touchmove", (e) => {
+  canvas.addEventListener("touchmove", e => {
     e.preventDefault();
     if (!drawing) return;
     const rect = canvas.getBoundingClientRect();
     const touch = e.touches[0];
-    ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-    ctx.stroke();
+    drawLine(touch.clientX - rect.left, touch.clientY - rect.top);
   });
 
-  canvas.addEventListener("touchend", (e) => {
-    e.preventDefault();
+  canvas.addEventListener("touchend", () => {
     drawing = false;
+    ctx.beginPath();
   });
-  document.getElementById("clear-ttd").addEventListener("click", () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  });
-  form.addEventListener("submit", function (e) {
-    const ttdData = canvas.toDataURL();
+
+  
+  const clearBtn = document.getElementById("clear-ttd");
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  }
+
+
+  const form = document.getElementById("formBukuTamu");
+  form.addEventListener("submit", e => {
+    const ttdData = canvas.toDataURL(); 
     document.getElementById("ttdData").value = ttdData;
   });
-});
+}
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -104,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
 
 
 
